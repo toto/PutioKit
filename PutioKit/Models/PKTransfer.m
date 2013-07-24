@@ -38,6 +38,7 @@
         self.transferStatus = PKTransferStatusQueued;
     }
     else {
+        NSAssert(NO, @"Unknown status: %@", statusType);
         self.transferStatus = PKTransferStatusUnknown;
     }
 }
