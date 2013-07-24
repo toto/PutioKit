@@ -118,7 +118,7 @@
 
 - (void)cancelTransfer:(PKTransfer *)transfer :(void(^)())onComplete failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"/v2/transfers/cancel?oauth_token=%@", self.apiToken];
-    NSDictionary *params = @{ @"transfer_ids": transfer.id };
+    NSDictionary *params = @{ @"transfer_ids": transfer.identifier };
 
     [self postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         onComplete();

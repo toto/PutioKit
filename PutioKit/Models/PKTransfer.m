@@ -12,39 +12,38 @@
 
 @implementation PKTransfer
 
-+ (id)objectWithDictionary:(NSDictionary *)dictionary;
+- (void)updateObjectWithDictionary:(NSDictionary *)dictionary;
 {
-    PKTransfer *object = [super objectWithDictionary:dictionary];
-    if (object) {
-        object.saveParentID = @([dictionary[@"save_parent_id"] intValue]);
-        object.fileID = dictionary[@"file_id"];
-
-        NSString *statusType = dictionary[@"status"];
-        
-        if ([statusType isEqualToString:@"ERROR"]) {
-            object.transferStatus = PKTransferStatusError;
-        }
-        else if ([statusType isEqualToString:@"DOWNLOADING"]) {
-            object.transferStatus = PKTransferStatusDownloading;
-        }
-        else if ([statusType isEqualToString:@"SEEDING"]) {
-            object.transferStatus = PKTransferStatusSeeding;
-        }
-        else if ([statusType isEqualToString:@"COMPLETED"]) {
-            object.transferStatus = PKTransferStatusCompleted;
-        }
-        else if ([statusType isEqualToString:@"IN_QUEUE"]) {
-            object.transferStatus = PKTransferStatusQueued;
-        }
-        else {
-            object.transferStatus = PKTransferStatusUnknown;
-        }
+    [super updateObjectWithDictionary:dictionary];
+    
+    self.identifier = [NSString stringWithFormat:@"%@", dictionary[@"id"]];
+    self.saveParentID = @([dictionary[@"save_parent_id"] intValue]);
+    self.fileID = dictionary[@"file_id"];
+    
+    NSString *statusType = dictionary[@"status"];
+    
+    if ([statusType isEqualToString:@"ERROR"]) {
+        self.transferStatus = PKTransferStatusError;
     }
-    return object;
+    else if ([statusType isEqualToString:@"DOWNLOADING"]) {
+        self.transferStatus = PKTransferStatusDownloading;
+    }
+    else if ([statusType isEqualToString:@"SEEDING"]) {
+        self.transferStatus = PKTransferStatusSeeding;
+    }
+    else if ([statusType isEqualToString:@"COMPLETED"]) {
+        self.transferStatus = PKTransferStatusCompleted;
+    }
+    else if ([statusType isEqualToString:@"IN_QUEUE"]) {
+        self.transferStatus = PKTransferStatusQueued;
+    }
+    else {
+        self.transferStatus = PKTransferStatusUnknown;
+    }
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ (%@): %@ - %@", NSStringFromClass([self class]), self.id.stringValue, self.name, self.statusMessage];
+    return [NSString stringWithFormat:@"%@ (%@): %@ - %@", NSStringFromClass([self class]), self.identifier, self.name, self.statusMessage];
 }
 
 - (NSString *)displayName {

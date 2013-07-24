@@ -53,7 +53,7 @@ typedef enum {
 @property (strong, nonatomic) NSNumber *isSeeding;
 
 /** Transfer id assigned by Put.io. */
-@property (strong, nonatomic) NSNumber *id;
+@property (strong, nonatomic) NSString *identifier;
 
 /** Source address of file. */
 @property (strong, nonatomic) NSString *source;
