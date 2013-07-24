@@ -31,6 +31,9 @@
     else if ([statusType isEqualToString:@"SEEDING"]) {
         self.transferStatus = PKTransferStatusSeeding;
     }
+    else if ([statusType isEqualToString:@"COMPLETING"]) {
+        self.transferStatus = PKTransferStatusCompleting;
+    }
     else if ([statusType isEqualToString:@"COMPLETED"]) {
         self.transferStatus = PKTransferStatusCompleted;
     }
