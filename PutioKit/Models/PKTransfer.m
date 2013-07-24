@@ -20,6 +20,10 @@
     self.saveParentID = @([dictionary[@"save_parent_id"] intValue]);
     self.fileID = dictionary[@"file_id"];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+    self.createdAt = [dateFormatter dateFromString:dictionary[@"created_at"]];
+    
     NSString *statusType = dictionary[@"status"];
     
     if ([statusType isEqualToString:@"ERROR"]) {

@@ -93,7 +93,7 @@ typedef enum {
 @property (strong, nonatomic) NSString *name;
 
 /** Creation date of transfer in iso8601 format. */
-@property (strong, nonatomic) NSString *createdAt;
+@property (strong, nonatomic) NSDate *createdAt;
 
 /** Error message of transfer. */
 @property (strong, nonatomic) NSString *errorMessage;
