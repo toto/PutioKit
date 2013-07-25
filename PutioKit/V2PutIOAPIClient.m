@@ -168,9 +168,18 @@
     }];
 }
 
-- (void)requestTorrentOrMagnetURL:(NSURL *)URL callback:(void(^)(id userInfoObject))onComplete addFailure:(void (^)())onAddFailure networkFailure:(void (^)(NSError *error))failure {
+- (void)requestTorrentOrMagnetURL:(NSURL *)URL
+                         toFolder:(PKFolder *)folder
+                         callback:(void (^)(id))onComplete
+                       addFailure:(void (^)())onAddFailure
+                   networkFailure:(void (^)(NSError *))failure
+{
     NSString *address = [NSString stringWithFormat:@"/v2/transfers/add?oauth_token=%@", self.apiToken];
     NSDictionary *params = @{ @"url": URL.absoluteString };
+    
+    if (folder) {
+        params = @{ @"url": URL.absoluteString, @"save_parent_id": folder.id };
+    }
 
     [self postPath:address parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (!responseObject) {
