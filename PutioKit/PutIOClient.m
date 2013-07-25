@@ -96,7 +96,7 @@ static PutIOClient *_sharedClient = nil;
 }
 
 - (void)requestTorrentOrMagnetURLAtPath:(NSString *)path :(void(^)(id userInfoObject))onComplete addFailure:(void (^)())onAddFailure networkFailure:(void (^)(NSError *error))failure {
-    [self.v2Client requestTorrentOrMagnetURLAtPath:path :^(id userInfoObject) {
+    [self.v2Client requestTorrentOrMagnetURL:path callback:^(id userInfoObject) {
         onComplete(userInfoObject);
     } addFailure:^{
         onAddFailure();

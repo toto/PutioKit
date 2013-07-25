@@ -168,9 +168,9 @@
     }];
 }
 
-- (void)requestTorrentOrMagnetURLAtPath:(NSString *)path :(void(^)(id userInfoObject))onComplete addFailure:(void (^)())onAddFailure networkFailure:(void (^)(NSError *error))failure {
+- (void)requestTorrentOrMagnetURL:(NSURL *)URL callback:(void(^)(id userInfoObject))onComplete addFailure:(void (^)())onAddFailure networkFailure:(void (^)(NSError *error))failure {
     NSString *address = [NSString stringWithFormat:@"/v2/transfers/add?oauth_token=%@", self.apiToken];
-    NSDictionary *params = @{@"url": path};
+    NSDictionary *params = @{ @"url": URL.absoluteString };
 
     [self postPath:address parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (!responseObject) {
@@ -190,7 +190,7 @@
     }];
 }
 
-- (void)uploadFile:(NSString *)path :(void(^)(id userInfoObject))onComplete addFailure:(void (^)())onAddFailure networkFailure:(void (^)(NSError *error))failure{
+- (void)uploadFile:(NSString *)path callback:(void(^)(id userInfoObject))onComplete addFailure:(void (^)())onAddFailure networkFailure:(void (^)(NSError *error))failure{
     NSString *fileName = [path lastPathComponent];
     NSData *fileContent = [NSData dataWithContentsOfFile:path];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: self.apiToken, @"oauth_token", nil];
