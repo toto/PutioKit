@@ -168,6 +168,22 @@
     }];
 }
 
+- (void)cleanFinishedTransfersCallback:(void (^)(id))onComplete networkFailure:(void (^)(NSError *))failure
+{
+    NSString *path = [NSString stringWithFormat:@"/v2/transfers/clean?oauth_token=%@", self.apiToken];
+    [self postPath:path parameters:nil success:nil failure:nil];
+    [self postPath:path
+        parameters:nil
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               if (onComplete) {
+                   NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                   onComplete(json);
+               }
+           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               if (failure) failure(error);
+           }];
+}
+
 - (void)requestTorrentOrMagnetURL:(NSURL *)URL
                          toFolder:(PKFolder *)folder
                          callback:(void (^)(id))onComplete

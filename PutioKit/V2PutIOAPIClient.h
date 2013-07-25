@@ -30,6 +30,7 @@
 
 - (void)getTransfers:(void(^)(NSArray *transfers))onComplete failure:(void (^)(NSError *error))failure;
 - (void)cancelTransfer:(PKTransfer *)transfer :(void(^)())onComplete failure:(void (^)(NSError *error))failure;
+- (void)cleanFinishedTransfersCallback:(void (^)(id))onComplete networkFailure:(void (^)(NSError *))failure;
 
 - (void)requestDeletionForDisplayItem:(NSObject <PKFolderItem> *)item :(void(^)(id userInfoObject))onComplete failure:(void (^)(NSError *error))failure;
 
