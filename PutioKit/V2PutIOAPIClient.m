@@ -199,12 +199,22 @@
     }];
 }
 
-- (void)uploadFile:(NSString *)path callback:(void(^)(id userInfoObject))onComplete addFailure:(void (^)())onAddFailure networkFailure:(void (^)(NSError *error))failure{
+- (void)uploadFile:(NSString *)path
+          toFolder:(PKFolder *)folder
+          callback:(void(^)(id userInfoObject))onComplete
+        addFailure:(void (^)())onAddFailure
+    networkFailure:(void (^)(NSError *error))failure{
     NSString *fileName = [path lastPathComponent];
     NSData *fileContent = [NSData dataWithContentsOfFile:path];
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: self.apiToken, @"oauth_token", nil];
-    
-    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"/v2/files/upload" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData){
+    NSDictionary *params = @{ @"oauth_token": self.apiToken };
+
+    NSString *requestPath;
+    if (folder) {
+        requestPath = [NSString stringWithFormat:@"/v2/files/upload?parent_id=%@", folder.id];
+    } else {
+        requestPath = @"/v2/files/upload";
+    }
+    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:requestPath parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData){
         [formData appendPartWithFileData:fileContent name:@"file" fileName:fileName mimeType:@"application/octet-stream"];
     }];
     
