@@ -17,7 +17,7 @@
 
 + (id)setup {
     V2PutIOAPIClient *api = [[V2PutIOAPIClient alloc] initWithBaseURL:[NSURL URLWithString:PKAPIRootURL]];
-                          
+
     if (api) {
         [api registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [[NSNotificationCenter defaultCenter] addObserver:api selector:@selector(updateAPIToken) name:PKAppAuthTokenUpdatedNotification object:nil];
@@ -46,7 +46,7 @@
 }
 
 - (void)getFolderItems:(PKFolder *)folder :(void(^)(NSArray *filesAndFolders))onComplete failure:(void (^)(NSError *))failure {
-    
+
     NSDictionary *params = @{
         @"parent_id": folder.id
     };
@@ -55,7 +55,7 @@
 
         NSArray *itemDictionaries = JSON[@"files"];
         NSMutableArray *objects = [NSMutableArray array];
-        
+
         for (NSDictionary *dictionary in itemDictionaries) {
             id contentType = dictionary[@"content_type"];
             if (contentType == [NSNull null] || [contentType isEqualToString:@"application/x-directory"]) {
@@ -78,8 +78,8 @@
 
 - (void)getAdditionalInfoForFile:(PKFile *)file :(void(^)())onComplete failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"/v2/files/%@", file.id];
-    [self genericGetAtPath:path withParams:nil :^(id JSON) {
-        [file updateObjectWithDictionary:JSON];
+    [self genericGetAtPath:path withParams:nil :^(NSDictionary* JSON) {
+        [file updateObjectWithDictionary:JSON[@"file"]];
         onComplete();
 
     } failure:^(NSError *error) {
@@ -92,7 +92,7 @@
     [self genericGetAtPath:path withParams:nil :^(id JSON) {
         PKMP4Status *status = [PKMP4Status objectWithDictionary:JSON];
         onComplete(status);
-        
+
     } failure:^(NSError *error) {
         failure(error);
     }];
@@ -123,7 +123,7 @@
     [self postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         onComplete();
     }
-     
+
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"failure in requesting delete %@", error);
        failure(error);
@@ -136,7 +136,7 @@
 - (void)requestDeletionForDisplayItem:(NSObject <PKFolderItem> *)item :(void(^)(id userInfoObject))onComplete failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"/v2/files/delete?oauth_token=%@", self.apiToken];
     NSDictionary *params = @{ @"file_ids": item.id };
-    
+
     [self postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (!responseObject) {
             onComplete(nil);
@@ -192,7 +192,7 @@
 {
     NSString *address = [NSString stringWithFormat:@"/v2/transfers/add?oauth_token=%@", self.apiToken];
     NSDictionary *params = @{ @"url": URL.absoluteString };
-    
+
     if (folder) {
         params = @{ @"url": URL.absoluteString, @"save_parent_id": folder.id };
     }
@@ -233,15 +233,15 @@
     NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:requestPath parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData){
         [formData appendPartWithFileData:fileContent name:@"file" fileName:fileName mimeType:@"application/octet-stream"];
     }];
-    
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
         if (!responseObject) {
             onAddFailure();
             return;
         }
-        
+
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        
+
         if ([json[@"status"] isEqualToString:@"ERROR"]) {
             onAddFailure();
         } else {
@@ -252,7 +252,7 @@
         NSLog(@"failure in file upload %@", error);
         failure(error);
     }];
-    
+
     [operation start];
 }
 
