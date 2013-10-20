@@ -78,7 +78,7 @@
 
 - (void)getAdditionalInfoForFile:(PKFile *)file :(void(^)())onComplete failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"/v2/files/%@", file.id];
-    [self genericGetAtPath:path withParams:nil :^(NSDictionary* JSON) {
+    [self genericGetAtPath:path withParams:nil :^(NSDictionary *JSON) {
         [file updateObjectWithDictionary:JSON[@"file"]];
         onComplete();
 
