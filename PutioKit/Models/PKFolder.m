@@ -44,6 +44,7 @@
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.size forKey:@"size"];
     [aCoder encodeObject:self.items forKey:@"items"];
+    [aCoder encodeObject:self.items forKey:@"id"];    
     [aCoder encodeInteger:self.numberOfParentFolders forKey:@"numberOfParentFolders"];
 }
 
@@ -51,6 +52,8 @@
 {
     self = [super init];
     if (self) {
+        _id = [aDecoder decodeObjectOfClass:[NSString class]
+                                             forKey:@"id"];
         _screenshot = [aDecoder decodeObjectOfClass:[NSString class]
                                              forKey:@"screenshot"];
         _parentID = [aDecoder decodeObjectOfClass:[NSString class]

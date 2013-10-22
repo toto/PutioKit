@@ -21,7 +21,7 @@ typedef enum {
 /**
  This class provides a PKObject subclass in type of PKTransfer.
  */
-@interface PKTransfer : PKObject
+@interface PKTransfer : PKObject <NSSecureCoding>
 
 
 /**---------------------------------------------------------------------------------------
