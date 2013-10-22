@@ -12,7 +12,7 @@
 /**
  This class provides a PKObject subclass in type of PKFile.
  */
-@interface PKFile : PKObject
+@interface PKFile : PKObject <NSSecureCoding>
 
 /**---------------------------------------------------------------------------------------
  * @name Properties
