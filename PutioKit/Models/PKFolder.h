@@ -9,7 +9,7 @@
 #import "PKObject.h"
 #import "PKFolderItem.h"
 
-@interface PKFolder : PKObject <PKFolderItem>
+@interface PKFolder : PKObject <PKFolderItem, NSSecureCoding>
 
 /** The folder's ID. */
 @property (strong) NSString *id;

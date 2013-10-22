@@ -5,6 +5,7 @@
 //  Copyright (c) 2012 Ahmet AYGÜN
 //
 
+#import "PKFolder.h"
 
 #import "PKFile.h"
 #import "NSString+DisplayName.h"
@@ -68,6 +69,47 @@ static NSArray *ImageFileTypes;
 
 - (BOOL)hasPreviewThumbnail {
     return [ThumbnailFileTypes containsObject:[self extension]];
+}
+
+
+#pragma mark NSSecureCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+{
+    [aCoder encodeObject:self.isShared forKey:@"isShared"];
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.displayName forKey:@"displayName"];
+    [aCoder encodeObject:self.screenshot forKey:@"screenshot"];
+    [aCoder encodeObject:self.createdAt forKey:@"createdAt"];
+    [aCoder encodeObject:self.parentID forKey:@"parentID"];
+    [aCoder encodeObject:self.isMP4Available forKey:@"isMP4Available"];
+    [aCoder encodeObject:self.contentType forKey:@"contentType"];
+    [aCoder encodeObject:self.icon forKey:@"icon"];
+    [aCoder encodeObject:self.id forKey:@"id"];
+    [aCoder encodeObject:self.size forKey:@"size"];
+    [aCoder encodeObject:self.opensubtitlesHash forKey:@"opensubtitlesHash"];
+    [aCoder encodeObject:self.folder forKey:@"folder"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder;
+{
+    self = [super init];
+    if (self) {
+        _isShared = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:@"isShared"];
+        _name = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"name"];
+        _displayName = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"displayName"];
+        _screenshot = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"screenshot"];
+        _createdAt = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"createdAt"];
+        _parentID = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"parentID"];
+        _isMP4Available = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:@"isMP4Available"];
+        _contentType = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"contentType"];
+        _icon = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"icon"];
+        _id = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"id"];
+        _size = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"size"];
+        _opensubtitlesHash = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"opensubtitlesHash"];
+        _folder = [aDecoder decodeObjectOfClass:[PKFolder class] forKey:@"folder"];
+    }
+    return self;
 }
 
 @end
