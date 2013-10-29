@@ -9,13 +9,14 @@
 #import "PKObject.h"
 
 typedef enum {
-    PKTransferStatusUnknown,
-    PKTransferStatusCompleted,
+    PKTransferStatusError = -1,
+    PKTransferStatusUnknown = 0,
+    PKTransferStatusCompleted = 1,
+    PKTransferStatusCompleting,
+    PKTransferStatusWaiting,
     PKTransferStatusQueued,
     PKTransferStatusDownloading,
-    PKTransferStatusSeeding,
-    PKTransferStatusCompleting,
-    PKTransferStatusError
+    PKTransferStatusSeeding
 } PKTransferStatus;
 
 /**

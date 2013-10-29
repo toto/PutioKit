@@ -45,7 +45,7 @@
         self.transferStatus = PKTransferStatusQueued;
     }
     else if ([statusType isEqualToString:@"WAITING"]) {
-        self.transferStatus = PKTransferStatusQueued;
+        self.transferStatus = PKTransferStatusWaiting;
     }
     else {
         NSAssert(NO, @"Unknown status: %@", statusType);
