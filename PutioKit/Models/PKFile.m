@@ -112,4 +112,9 @@ static NSArray *ImageFileTypes;
     return self;
 }
 
++ (BOOL)supportsSecureCoding;
+{
+    return YES;
+}
+
 @end

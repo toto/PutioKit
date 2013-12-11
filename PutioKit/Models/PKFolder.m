@@ -44,7 +44,7 @@
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.size forKey:@"size"];
     [aCoder encodeObject:self.items forKey:@"items"];
-    [aCoder encodeObject:self.items forKey:@"id"];    
+    [aCoder encodeObject:self.id forKey:@"id"];
     [aCoder encodeInteger:self.numberOfParentFolders forKey:@"numberOfParentFolders"];
 }
 
