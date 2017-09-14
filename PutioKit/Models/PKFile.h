@@ -9,6 +9,8 @@
 #import "PKObject.h"
 @class PKFolder;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class provides a PKObject subclass in type of PKFile.
  */
@@ -66,3 +68,5 @@
 - (BOOL)isAudioType;
 
 @end
+
+NS_ASSUME_NONNULL_END

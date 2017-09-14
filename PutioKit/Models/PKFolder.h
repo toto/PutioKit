@@ -9,6 +9,8 @@
 #import "PKObject.h"
 #import "PKFolderItem.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface PKFolder : PKObject <PKFolderItem, NSSecureCoding>
 
 /** The folder's ID. */
@@ -37,3 +39,5 @@
 - (NSArray *)orderedItems;
 
 @end
+
+NS_ASSUME_NONNULL_END

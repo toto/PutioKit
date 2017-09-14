@@ -9,6 +9,8 @@
 #import "PKAccountSettings.h"
 #import "PKObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class provides a PKObject subclass in type of PKAccount.
  */
@@ -37,3 +39,5 @@
 @property (strong, nonatomic) PKAccountSettings *settings;
 
 @end
+
+NS_ASSUME_NONNULL_END

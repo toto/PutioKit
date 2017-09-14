@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 ortatherox.com. All rights reserved.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Callback strings
 extern NSString *const PKCallbackOriginal;
 extern NSString *const PKCallbackModified;
@@ -29,3 +31,5 @@ extern NSString *const PKAPISecretDefault;
 
 // Notifications
 extern NSString *const PKAppAuthTokenUpdatedNotification;
+
+NS_ASSUME_NONNULL_END

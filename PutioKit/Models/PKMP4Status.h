@@ -8,13 +8,15 @@
 
 #import "PKObject.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, PKMP4StatusType) {
     PKMP4StatusCompleted,
     PKMP4StatusConverting,
     PKMP4StatusQueued,
     PKMP4StatusNotAvailable,
     PKMP4StatusUnknown
-} PKMP4StatusType;
+};
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface PKMP4Status : PKObject
 
@@ -25,3 +27,5 @@ typedef enum {
 @property (strong, nonatomic) NSNumber *progress;
 
 @end
+
+NS_ASSUME_NONNULL_END

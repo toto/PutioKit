@@ -8,6 +8,8 @@
 
 #import "PKObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class provides a PKObject subclass in type of PKFriend.
  */
@@ -21,3 +23,5 @@
 @property (strong, nonatomic) NSString *name;
 
 @end
+
+NS_ASSUME_NONNULL_END

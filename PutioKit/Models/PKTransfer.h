@@ -8,7 +8,7 @@
 
 #import "PKObject.h"
 
-typedef enum {
+typedef  NS_ENUM(NSInteger, PKTransferStatus) {
     PKTransferStatusError = -1,
     PKTransferStatusUnknown = 0,
     PKTransferStatusCompleted = 1,
@@ -17,7 +17,9 @@ typedef enum {
     PKTransferStatusQueued,
     PKTransferStatusDownloading,
     PKTransferStatusSeeding
-} PKTransferStatus;
+};
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  This class provides a PKObject subclass in type of PKTransfer.
@@ -107,3 +109,5 @@ typedef enum {
 - (NSString *)displayName;
 
 @end
+
+NS_ASSUME_NONNULL_END

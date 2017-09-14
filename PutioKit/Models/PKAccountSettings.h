@@ -8,6 +8,8 @@
 
 #import "PKObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  This class provides a NSObject subclass in type of PKAccountSettings.
  */
@@ -30,3 +32,5 @@
 @property (strong, nonatomic) NSNumber *extractionDefault;
 
 @end
+
+NS_ASSUME_NONNULL_END

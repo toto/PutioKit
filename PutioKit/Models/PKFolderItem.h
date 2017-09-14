@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 PutIOKit. All rights reserved.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol PKFolderItem <NSObject>
 
 @property (strong) NSString *id;
@@ -15,3 +17,5 @@
 @property (strong) NSString *parentID;
 
 @end
+
+NS_ASSUME_NONNULL_END
